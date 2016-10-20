@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'Contrast_Example' do
+  pod 'Contrast', :path => '../'
+
+  target 'Contrast_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
