@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'Contrast'
   s.version          = '0.1.0'
-  s.summary          = 'A library for finding differences in 2-dimensional sets.'
+  s.summary          = 'A library for finding differences in 2-dimensional collections.'
   s.homepage         = 'https://github.com/briansemiglia/Contrast'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Brian Semiglia' => 'brian.semiglia@gmail.com' }
