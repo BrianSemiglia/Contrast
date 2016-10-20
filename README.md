@@ -5,7 +5,7 @@
 [![License](https://img.shields.io/cocoapods/l/Contrast.svg?style=flat)](http://cocoapods.org/pods/Contrast)
 [![Platform](https://img.shields.io/cocoapods/p/Contrast.svg?style=flat)](http://cocoapods.org/pods/Contrast)
 
-## Example
+## Examples
 
 Index Shifts
 ```
