@@ -9,9 +9,9 @@
 import Foundation
 
 public struct Shift<T: Equatable> {
-  let element: T
-  let origin: Int
-  let destination: Int
+  public let element: T
+  public let origin: Int
+  public let destination: Int
   
   public init(element: T, origin: Int, destination: Int) {
     self.element = element
@@ -29,9 +29,9 @@ extension Shift: Equatable {
 }
 
 public struct PathShift<T> {
-  let element: T
-  let origin: IndexPath
-  let destination: IndexPath
+  public let element: T
+  public let origin: IndexPath
+  public let destination: IndexPath
   
   public init(element: T, origin: IndexPath, destination: IndexPath) {
     self.element = element
@@ -48,8 +48,8 @@ extension PathShift: Equatable {
 }
 
 public struct Indexed<T: Equatable> {
-  let element: T
-  let index: Int
+  public let element: T
+  public let index: Int
   public init(element: T, index: Int) {
     self.element = element
     self.index = index
@@ -64,8 +64,8 @@ extension Indexed: Equatable {
 }
 
 public struct PathIndexed<T: Equatable> {
-  let element: T
-  let index: IndexPath
+  public let element: T
+  public let index: IndexPath
   public init(element: T, index: IndexPath) {
     self.element = element
     self.index = index
