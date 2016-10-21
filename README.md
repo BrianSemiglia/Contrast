@@ -1,4 +1,5 @@
 # Contrast
+A library for finding differences in 2-dimensional sets.
 
 ## Examples
 
