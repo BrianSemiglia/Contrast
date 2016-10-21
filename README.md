@@ -62,10 +62,6 @@ Contrast is available through [CocoaPods](http://cocoapods.org). To install it, 
 pod "Contrast"
 ```
 
-## Author
-
-Brian Semiglia, brian.semiglia@gmail.com
-
 ## License
 
 Contrast is available under the MIT license. See the LICENSE file for more info.
