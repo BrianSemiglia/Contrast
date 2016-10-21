@@ -1,14 +1,9 @@
 # Contrast
 
-[![CI Status](http://img.shields.io/travis/Brian Semiglia/Contrast.svg?style=flat)](https://travis-ci.org/Brian Semiglia/Contrast)
-[![Version](https://img.shields.io/cocoapods/v/Contrast.svg?style=flat)](http://cocoapods.org/pods/Contrast)
-[![License](https://img.shields.io/cocoapods/l/Contrast.svg?style=flat)](http://cocoapods.org/pods/Contrast)
-[![Platform](https://img.shields.io/cocoapods/p/Contrast.svg?style=flat)](http://cocoapods.org/pods/Contrast)
-
 ## Examples
 
 Index Shifts
-```
+```swift
 ["a", "b", "c"].shifts(["b", "a", "d"]) ==
 [
   Shift(element: "a", origin: 0, destination: 1),
@@ -17,7 +12,7 @@ Index Shifts
 ```
 
 Index Deletions
-```
+```swift
 ["a", "b", "c"].deletions(["b", "a", "d"]) == 
 [
   Indexed(element: "c", index: 2)
@@ -25,7 +20,7 @@ Index Deletions
 ```
 
 Index Additions
-```
+```swift
 ["a", "b", "c"].additions(["b", "a", "d"]) ==
 [
   Indexed(element: "c", index: 2)
@@ -33,7 +28,7 @@ Index Additions
 ```
 
 Index Path Shifts
-```
+```swift
 [["a", "b"], ["c", "d"]].shifts([["a", "d"], ["c", "b"]]) ==
 [
   PathShift(
