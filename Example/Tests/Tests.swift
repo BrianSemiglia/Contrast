@@ -9,8 +9,8 @@ class Tests: XCTestCase {
       ["a", "b"].shifts(["b", "a"])
       ==
       [
-        Shift(element: "a", origin: 0, destination: 1),
-        Shift(element: "b", origin: 1, destination: 0)
+        Shifted(element: "a", origin: 0, destination: 1),
+        Shifted(element: "b", origin: 1, destination: 0)
       ]
     )
   }
@@ -20,8 +20,8 @@ class Tests: XCTestCase {
       ["a", "b"].shifts(["b", "a", "c"])
       ==
       [
-        Shift(element: "a", origin: 0, destination: 1),
-        Shift(element: "b", origin: 1, destination: 0)
+        Shifted(element: "a", origin: 0, destination: 1),
+        Shifted(element: "b", origin: 1, destination: 0)
       ]
     )
   }
@@ -43,12 +43,12 @@ class Tests: XCTestCase {
       [["a", "b"], ["c", "d"]].shifts([["a", "d"], ["c", "b"]])
       ==
       [
-        PathShift(
+        PathShifted(
           element: "b",
           origin: IndexPath(row: 1, section: 0),
           destination: IndexPath(row: 1, section: 1)
         ),
-        PathShift(
+        PathShifted(
           element: "d",
           origin: IndexPath(row: 1, section: 1),
           destination: IndexPath(row: 1, section: 0)

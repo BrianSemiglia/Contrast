@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct Shift<T: Equatable> {
+public struct Shifted<T: Equatable> {
   public let element: T
   public let origin: Int
   public let destination: Int
@@ -20,15 +20,15 @@ public struct Shift<T: Equatable> {
   }
 }
 
-extension Shift: Equatable {
-  public static func ==(left: Shift, right: Shift) -> Bool { return
+extension Shifted: Equatable {
+  public static func ==(left: Shifted, right: Shifted) -> Bool { return
     left.origin == right.origin &&
     left.destination == right.destination &&
     left.element == right.element
   }
 }
 
-public struct PathShift<T> {
+public struct PathShifted<T> {
   public let element: T
   public let origin: IndexPath
   public let destination: IndexPath
@@ -40,8 +40,8 @@ public struct PathShift<T> {
   }
 }
 
-extension PathShift: Equatable {
-  public static func ==(left: PathShift, right: PathShift) -> Bool { return
+extension PathShifted: Equatable {
+  public static func ==(left: PathShifted, right: PathShifted) -> Bool { return
     left.origin == right.origin &&
     left.destination == right.destination
   }
@@ -81,12 +81,12 @@ extension PathIndexed: Equatable {
 
 public extension Collection where Iterator.Element: Hashable {
 
-  public func shifts(_ input: Self) -> [Shift<Iterator.Element>] { return
+  public func shifts(_ input: Self) -> [Shifted<Iterator.Element>] { return
     enumerated().flatMap { item in return
       input.enumerated()
       .filter { $0.element == item.element && $0.offset != item.offset }
       .map { match in
-        Shift(
+        Shifted(
           element: item.element,
           origin: item.offset,
           destination: match.offset
@@ -112,12 +112,12 @@ public extension Collection where Iterator.Element: Hashable {
 
 public extension Array where Element: Collection, Element.Iterator.Element: Hashable {
   
-  public func shifts(_ input: [Element]) -> [PathShift<Element.Iterator.Element>] { return
+  public func shifts(_ input: [Element]) -> [PathShifted<Element.Iterator.Element>] { return
     indexedFlattened().flatMap { item in return
       input.indexedFlattened()
       .filter { $0.element == item.element && $0.index != item.index }
       .map { match in
-        PathShift(
+        PathShifted(
           element: item.element,
           origin: item.index,
           destination: match.index
