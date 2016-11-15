@@ -5,7 +5,8 @@ A library for finding differences in 2-dimensional sets.
 
 Index Shifts
 ```swift
-["a", "b", "c"].shifts(["b", "a", "d"]) ==
+["a", "b", "c"].shifts(["b", "a", "d"]) 
+==
 [
   Shift(element: "a", origin: 0, destination: 1),
   Shift(element: "b", origin: 1, destination: 0)
@@ -14,7 +15,8 @@ Index Shifts
 
 Index Deletions
 ```swift
-["a", "b", "c"].deletions(["b", "a", "d"]) == 
+["a", "b", "c"].deletions(["b", "a", "d"]) 
+== 
 [
   Indexed(element: "c", index: 2)
 ]
@@ -22,7 +24,8 @@ Index Deletions
 
 Index Additions
 ```swift
-["a", "b", "c"].additions(["b", "a", "d"]) ==
+["a", "b", "c"].additions(["b", "a", "d"]) 
+==
 [
   Indexed(element: "c", index: 2)
 ]
@@ -30,7 +33,8 @@ Index Additions
 
 Index Path Shifts
 ```swift
-[["a", "b"], ["c", "d"]].shifts([["a", "d"], ["c", "b"]]) ==
+[["a", "b"], ["c", "d"]].shifts([["a", "d"], ["c", "b"]]) 
+==
 [
   PathShift(
     element: "b",
