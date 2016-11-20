@@ -11,7 +11,7 @@ struct Example {
 }
 
 extension Example: Granularelatable {
-  func equality(_ input: Updateable) -> GranulatedEquality {
+  func equality(_ input: Example) -> GranulatedEquality {
     if value == input.value && state != input.state { return
       .partial
     } else if value == input.value && state == input.state { return
