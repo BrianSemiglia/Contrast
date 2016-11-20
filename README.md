@@ -1,9 +1,31 @@
 # Contrast
-A library for finding differences in 2-dimensional sets.
+A library for finding differences in 2-dimensional sets. Not exactly performant and still a work in progress.
+
+## Usage
+Items in set must conform to ```Granularelatable```.
+
+```swift
+struct Example {
+  let value: String
+  let state: Bool
+}
+
+extension Example: Granularelatable {
+  func equality(_ input: Updateable) -> GranulatedEquality {
+    if value == input.value && state != input.state { return
+      .partial
+    } else if value == input.value && state == input.state { return
+      .complete
+    } else { return
+      .none
+    }
+  }
+}
+```
 
 ## Examples
 
-Index Shifts
+Indexed Shifts
 ```swift
 ["a", "b", "c"].shifts(["b", "a", "d"]) 
 ==
@@ -13,7 +35,7 @@ Index Shifts
 ]
 ```
 
-Index Deletions
+Indexed Deletions
 ```swift
 ["a", "b", "c"].deletions(["b", "a", "d"]) 
 == 
@@ -22,7 +44,7 @@ Index Deletions
 ]
 ```
 
-Index Additions
+Indexed Additions
 ```swift
 ["a", "b", "c"].additions(["b", "a", "d"]) 
 ==
@@ -30,8 +52,25 @@ Index Additions
   Indexed(element: "c", index: 2)
 ]
 ```
+Indexed Updates
+```swift
+[
+  Example(value: "a", state: true), 
+  Example(value: "b", state: true)
+].updates([
+  Example(value: "a", state: true),
+  Example(value: "b", state: false)
+])
+==
+[
+  Indexed(
+    element: Example(value: "b", state: false),
+    index: 1
+  )
+]
+```
 
-Index Path Shifts
+Index-Pathed Shifts
 ```swift
 [["a", "b"], ["c", "d"]].shifts([["a", "d"], ["c", "b"]]) 
 ==
