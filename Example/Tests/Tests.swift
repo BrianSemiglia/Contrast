@@ -4,6 +4,62 @@ import Contrast
 
 class Tests: XCTestCase {
 
+  func testDeletions() {
+    XCTAssert(
+      ["a", "b"].deletions(["a", "b"])
+      ==
+      []
+    )
+  }
+  
+  func testDeletionsNone() {
+    XCTAssert(
+      ["a", "b"].deletions(["b"])
+      ==
+      [
+        Indexed(element: "a", index: 0)
+      ]
+    )
+  }
+  
+  func testUpdatesSome() {
+    XCTAssert(
+      [
+        Updateable(value: "a", state: true),
+        Updateable(value: "b", state: true)
+      ]
+      .updates([
+        Updateable(value: "a", state: true),
+        Updateable(value: "b", state: false)
+      ])
+      ==
+      [
+        Indexed(
+          element: Updateable(
+            value: "b",
+            state: false
+          ),
+          index: 1
+        )
+      ]
+    )
+  }
+  
+  func testUpdatesNone() {
+    XCTAssert(
+      [
+        Updateable(value: "a", state: true),
+        Updateable(value: "b", state: true)
+      ]
+      .updates([
+        Updateable(value: "a", state: true),
+        Updateable(value: "b", state: true)
+      ])
+      ==
+      []
+    )
+  }
+  
   func testShiftSome() {
     XCTAssert(
       ["a", "b"].shifts(["b", "a"])
@@ -26,7 +82,15 @@ class Tests: XCTestCase {
     )
   }
   
-  func testShiftNoneReplaceAll() {
+  func testAdditionsNone() {
+    XCTAssert(
+      ["a", "b"].additions(["a", "b"])
+      ==
+      []
+    )
+  }
+  
+  func testAdditionsAll() {
     XCTAssert(
       ["a", "b", "c"].additions(["d", "e", "f"])
       ==
@@ -65,7 +129,7 @@ class Tests: XCTestCase {
     )
   }
   
-  func testDeletions() {
+  func testDeletionsNested() {
     XCTAssert(
       [["a", "b"], ["c", "d"]].deletions([["a", "d"], ["b"]])
       ==
@@ -81,24 +145,11 @@ class Tests: XCTestCase {
     )
   }
   
-  func testDeletionsNone() {
+  func testDeletionsNestedNone() {
     XCTAssert(
       [["a", "b"], ["c", "d"]].deletions([["a", "d"], ["c", "b"]])
       ==
       [PathIndexed<String>]()
-    )
-  }
-  
-  func testFlattening() {
-    XCTAssert(
-      [["a", "b"], ["c", "d"]].indexedFlattened()
-      ==
-      [
-        PathIndexed(element: "a", index: IndexPath(row: 0, section: 0)),
-        PathIndexed(element: "b", index: IndexPath(row: 1, section: 0)),
-        PathIndexed(element: "c", index: IndexPath(row: 0, section: 1)),
-        PathIndexed(element: "d", index: IndexPath(row: 1, section: 1))
-      ]
     )
   }
   
@@ -118,12 +169,71 @@ class Tests: XCTestCase {
     )
   }
   
-  func testAdditionsNone() {
+  func testNestedAdditionsNone() {
     XCTAssert(
       [["a", "b"], ["c", "d"]].additions([["a", "d"], ["c", "b"]])
       ==
       [PathIndexed<String>]()
     )
   }
-    
+  
+  func testNestedUpdatesNone() {
+    XCTAssert(
+      [[Updateable(value: "a", state: true)]].updates([[Updateable(value: "a", state: true)]])
+      ==
+      []
+    )
+  }
+  
+  func testNestedUpdatesSome() {
+    XCTAssert(
+      [[Updateable(value: "a", state: true)]].updates([[Updateable(value: "a", state: false)]])
+      ==
+      [
+        PathIndexed(
+          element: Updateable(value: "a", state: false),
+          index: IndexPath(
+            row:0,
+            section: 0
+          )
+        )
+      ]
+    )
+  }
+}
+
+struct Updateable {
+  let value: String
+  let state: Bool
+}
+
+extension Updateable: Granularelatable {
+  func equality(_ input: Updateable) -> GranulatedEquality {
+    if value == input.value && state != input.state { return
+      .partial
+    } else if value == input.value && state == input.state { return
+      .complete
+    } else { return
+      .none
+    }
+  }
+}
+
+extension Updateable: Hashable {
+  var hashValue: Int { return
+    value.hash
+  }
+}
+
+extension Updateable: Equatable {
+  public static func ==(left: Updateable, right: Updateable) -> Bool { return
+    left.value == right.value &&
+    left.state == right.state
+  }
+}
+
+extension String: Granularelatable {
+  public func equality(_ input: String) -> GranulatedEquality { return
+    self == input ? .complete : .none
+  }
 }
