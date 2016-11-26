@@ -1,5 +1,5 @@
 # Contrast
-A library for finding differences (insetions/deletions/moves/updates) in 2-dimensional sets. Not exactly performant and still a work in progress.
+A library for finding differences in 2-dimensional sets. Not exactly performant and still a work in progress.
 
 ## Usage
 Items in set must conform to ```Granularelatable```.
