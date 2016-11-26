@@ -1,5 +1,5 @@
 # Contrast
-A library for finding differences in 2-dimensional sets. Not exactly performant and still a work in progress.
+A library for finding differences (insetions/deletions/moves/updates) in 2-dimensional sets. Not exactly performant and still a work in progress.
 
 ## Usage
 Items in set must conform to ```Granularelatable```.
@@ -30,8 +30,8 @@ Indexed Shifts
 ["a", "b", "c"].shifts(["b", "a", "d"]) 
 ==
 [
-  Shift(element: "a", origin: 0, destination: 1),
-  Shift(element: "b", origin: 1, destination: 0)
+  Shifted(element: "a", origin: 0, destination: 1),
+  Shifted(element: "b", origin: 1, destination: 0)
 ]
 ```
 
@@ -75,12 +75,12 @@ Index-Pathed Shifts
 [["a", "b"], ["c", "d"]].shifts([["a", "d"], ["c", "b"]]) 
 ==
 [
-  PathShift(
+  PathShifted(
     element: "b",
     origin: IndexPath(row: 1, section: 0),
     destination: IndexPath(row: 1, section: 1)
   ),
-  PathShift(
+  PathShifted(
     element: "d",
     origin: IndexPath(row: 1, section: 1),
     destination: IndexPath(row: 1, section: 0)
